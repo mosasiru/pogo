@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"time"
+	"net/http"
 
 	"github.com/pkmngo-odi/pogo/auth"
 
@@ -45,6 +46,10 @@ func NewSession(provider auth.Provider, location *Location, feed *Feed, debug bo
 
 func (s *Session) SetTimeout(d time.Duration) {
 	s.rpc.http.Timeout = d
+}
+
+func (s *Session) SetTransport(t http.RoundTripper) {
+	s.rpc.http.Transport = t
 }
 
 func (s *Session) setURL(urlToken string) {
