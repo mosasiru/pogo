@@ -222,6 +222,9 @@ func (s *Session) GetPlayerMap() (*protos.GetMapObjectsResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	if len(response.Returns) == 0 {
+		return nil, fmt.Errorf("response no bytes")
+	}
 
 	mapCells := &protos.GetMapObjectsResponse{}
 	proto.Unmarshal(response.Returns[0], mapCells)
